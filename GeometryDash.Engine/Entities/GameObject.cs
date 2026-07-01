@@ -21,13 +21,13 @@
       IsOnScreen = false;
     }
 
-    public void AssignValues(float x, float y, float sizX, float sizY, bool isOnScr, ObjectType objType)
+    public void AssignValues(float x, float y, ObjectType objType, float sizX = 50f, float sizY = 50f)
     {
       PosX = x;
       PosY = y;
       SizeX = sizX;
       SizeY = sizY;
-      IsOnScreen = isOnScr;
+      IsOnScreen = true;
       Type = objType;
     }
   }
