@@ -1,0 +1,14 @@
+C:\Users\Ondra\source\repos\GeometryDash\GeometryDash\bin\Debug\net10.0\GeometryDash.exe
+C:\Users\Ondra\source\repos\GeometryDash\GeometryDash\bin\Debug\net10.0\GeometryDash.deps.json
+C:\Users\Ondra\source\repos\GeometryDash\GeometryDash\bin\Debug\net10.0\GeometryDash.runtimeconfig.json
+C:\Users\Ondra\source\repos\GeometryDash\GeometryDash\bin\Debug\net10.0\GeometryDash.dll
+C:\Users\Ondra\source\repos\GeometryDash\GeometryDash\bin\Debug\net10.0\GeometryDash.pdb
+C:\Users\Ondra\source\repos\GeometryDash\GeometryDash\obj\Debug\net10.0\GeometryDash.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Ondra\source\repos\GeometryDash\GeometryDash\obj\Debug\net10.0\GeometryDash.AssemblyInfoInputs.cache
+C:\Users\Ondra\source\repos\GeometryDash\GeometryDash\obj\Debug\net10.0\GeometryDash.AssemblyInfo.cs
+C:\Users\Ondra\source\repos\GeometryDash\GeometryDash\obj\Debug\net10.0\GeometryDash.csproj.CoreCompileInputs.cache
+C:\Users\Ondra\source\repos\GeometryDash\GeometryDash\obj\Debug\net10.0\GeometryDash.dll
+C:\Users\Ondra\source\repos\GeometryDash\GeometryDash\obj\Debug\net10.0\refint\GeometryDash.dll
+C:\Users\Ondra\source\repos\GeometryDash\GeometryDash\obj\Debug\net10.0\GeometryDash.pdb
+C:\Users\Ondra\source\repos\GeometryDash\GeometryDash\obj\Debug\net10.0\GeometryDash.genruntimeconfig.cache
+C:\Users\Ondra\source\repos\GeometryDash\GeometryDash\obj\Debug\net10.0\ref\GeometryDash.dll
