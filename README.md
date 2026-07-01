@@ -9,9 +9,10 @@ GeometryDash/
 ├──Program.cs
 GeometryDash.Engine/
 ├── Core/
-│   └── ObjectPool.cs       # Entity recycling system using FIFO queues
+│   └── GameSettings.cs    # Static game settings
 ├── Entities/
-│   ├── GameObject.cs       # Base game entity configuration
+│   ├── GameObject.cs      # Base game entity configuration
+|   ├── ObjectPool.cs      # Entity recycling system using FIFO queues
 │   └── PlayerCube.cs       # Jump physics and gravity handling
 └── Physics/
     └── CollisionEngine.cs  # AABB collision detection and state tracking
