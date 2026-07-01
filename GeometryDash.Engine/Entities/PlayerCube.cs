@@ -7,7 +7,7 @@ namespace GeometryDash.Engine.Entities
     public float PosX {  get; set; }
     public float PosY { get; set; }
     public float VelocityY {  get; set; }
-    public bool IsGrounded { get; private set; }
+    public bool IsGrounded { get; internal set; }
     public bool IsDead { get; set; }
     public float Width { get; } = 40f;
     public float Height { get; } = 40f;
