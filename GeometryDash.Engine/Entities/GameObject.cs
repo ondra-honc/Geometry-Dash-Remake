@@ -16,14 +16,14 @@
     public bool IsOnScreen { get; set; }
     public ObjectType Type { get; set; } = ObjectType.SolidBlock;
 
-    public GameObject(float X, float Y, float SizX, float SizY, bool IsOnScr, ObjectType ObjType)
+    public GameObject(float x, float y, float sizX, float sizY, bool isOnScr, ObjectType objType)
     {
-      PosX = X;
-      PosY = Y;
-      SizeX = SizX;
-      SizeY = SizY;
-      IsOnScreen = IsOnScr;
-      Type = ObjType;
+      PosX = x;
+      PosY = y;
+      SizeX = sizX;
+      SizeY = sizY;
+      IsOnScreen = isOnScr;
+      Type = objType;
     }
   }
 }
