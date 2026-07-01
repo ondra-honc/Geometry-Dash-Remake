@@ -16,7 +16,12 @@
     public bool IsOnScreen { get; set; }
     public ObjectType Type { get; set; } = ObjectType.SolidBlock;
 
-    public GameObject(float x, float y, float sizX, float sizY, bool isOnScr, ObjectType objType)
+    public GameObject()
+    {
+      IsOnScreen = false;
+    }
+
+    public void AssignValues(float x, float y, float sizX, float sizY, bool isOnScr, ObjectType objType)
     {
       PosX = x;
       PosY = y;
