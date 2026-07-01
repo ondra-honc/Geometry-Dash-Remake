@@ -2,7 +2,7 @@
 
 namespace GeometryDash.Engine.Entities
 {
-  internal class PlayerCube
+  public class PlayerCube
   {
     public float PosX {  get; set; }
     public float PosY { get; set; }

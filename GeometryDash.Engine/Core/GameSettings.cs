@@ -1,6 +1,6 @@
 ﻿namespace GeometryDash.Engine.Core
 {
-  internal class GameSettings
+  public class GameSettings
   {
     public const int windowWidth = 1280;
     public const int windowHeight = 720;

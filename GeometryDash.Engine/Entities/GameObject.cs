@@ -1,6 +1,6 @@
 ﻿namespace GeometryDash.Engine.Entities
 {
-  internal class GameObject
+  public class GameObject
   {
     public enum ObjectType
     {
