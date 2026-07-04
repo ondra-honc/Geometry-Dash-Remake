@@ -21,6 +21,20 @@ namespace GeometryDash.Engine.Core
       _accumulatedTime = 0.0;
     }
 
-    
+    public int GetRequiredUpdateTicks()
+    {
+      double currentTime = _stopwatch.Elapsed.TotalSeconds;
+      double elapsedTime = currentTime - _previousTime;
+      _previousTime = currentTime;
+
+      _accumulatedTime += elapsedTime;
+
+      int ticks = (int)(_accumulatedTime / _targetFrameTime);
+      _accumulatedTime -= ticks * _targetFrameTime;
+
+      return ticks;
+    }
+
+    public float FixedDeltaTime => (float)_targetFrameTime;
   }
 }
