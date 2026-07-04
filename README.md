@@ -9,12 +9,14 @@ GeometryDash/
 ├── Program.cs
 GeometryDash.Engine/
 ├── Core/
-│   └── GameSettings.cs    # Static game settings
+│   ├── Engine.cs          # Main engine loop
+|   ├── GameSettings.cs    # Static game settings
+|   └── TimeStep.cs        # Fixed time step accumulator
 ├── Entities/
 │   ├── GameObject.cs      # Base game entity configuration
 |   ├── ObjectPool.cs      # Entity recycling system using FIFO queues
-│   └── PlayerCube.cs       # Jump physics and gravity handling
+│   └── PlayerCube.cs      # Jump physics and gravity handling
 ├── Physics/
 │   └── CollisionEngine.cs  # AABB collision detection and state tracking
 └──World/
-    └── LevelManager.cs # Loading level data with pretedermined structure
+    └── LevelManager.cs  # Loading level data with pretedermined structure
