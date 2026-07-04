@@ -6,7 +6,7 @@ Geometry Dash Remake made completely from scratch, using a custom programmed eng
 
 ```text
 GeometryDash/
-├──Program.cs
+├── Program.cs
 GeometryDash.Engine/
 ├── Core/
 │   └── GameSettings.cs    # Static game settings
@@ -14,5 +14,7 @@ GeometryDash.Engine/
 │   ├── GameObject.cs      # Base game entity configuration
 |   ├── ObjectPool.cs      # Entity recycling system using FIFO queues
 │   └── PlayerCube.cs       # Jump physics and gravity handling
-└── Physics/
-    └── CollisionEngine.cs  # AABB collision detection and state tracking
+├── Physics/
+│   └── CollisionEngine.cs  # AABB collision detection and state tracking
+└──World/
+    └── LevelManager.cs # Loading level data with pretedermined structure
