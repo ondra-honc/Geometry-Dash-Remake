@@ -1,10 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
+using System.IO;
 
 namespace GeometryDash.Engine.World
 {
-  internal class LevelManager
+  public struct LevelData
   {
+    public int TypeId;
+    public float X;
+    public float Y;
+  }
+
+  public class LevelManager
+  {
+    
   }
 }
