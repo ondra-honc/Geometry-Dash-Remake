@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-
-namespace GeometryDash.Engine.World
+﻿namespace GeometryDash.Engine.World
 {
   public struct LevelData
   {
