@@ -16,12 +16,22 @@ namespace GeometryDash.Engine.Core
     private const int Size = 40;
     private Entities.PlayerCube cube;
 
+    public int screenWidth;
+    public int screenHeight;
+    public int floorHeight;
+    public int floorY;
+
     public void Start()
     {
       Raylib.InitWindow(1280,720, "Geometry Dash Remake");
       Raylib.ToggleBorderlessWindowed();
       Raylib.SetTargetFPS((int)(GameSettings.targetFrameRate));
-      
+
+      screenWidth = Raylib.GetScreenWidth();
+      screenHeight = Raylib.GetScreenHeight();
+      floorHeight = (int)(screenHeight * 0.20f);
+      floorY = screenHeight - floorHeight;
+
       levelManager = new World.LevelManager();
       levelManager.LoadLevel("level1.gdl");
 
@@ -29,7 +39,7 @@ namespace GeometryDash.Engine.Core
       levelStreamer = new World.LevelStreamer();
       levelStreamer.Initialize(pool);
 
-      cube = new Entities.PlayerCube(0f, 350f);
+      cube = new Entities.PlayerCube(0f, floorY - Size);
       
       timeStep = new TimeStep((int)(GameSettings.targetFrameRate));
       timeStep.Start();
@@ -64,12 +74,7 @@ namespace GeometryDash.Engine.Core
       Raylib.BeginDrawing();
       Raylib.ClearBackground(Color.SkyBlue);
 
-      int screenWidth = Raylib.GetScreenWidth();
-      int screenHeight = Raylib.GetScreenHeight();
-
-      int floorHeight = (int)(screenHeight * 0.20f);
-      int floorY = screenHeight - floorHeight; 
-
+      
       Raylib.DrawRectangle(0, floorY, screenWidth, floorHeight, Color.DarkBlue);
       Raylib.DrawLine(0, floorY, screenWidth, floorY, Color.White);
 
