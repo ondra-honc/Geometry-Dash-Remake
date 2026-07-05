@@ -7,6 +7,22 @@ namespace GeometryDash.Engine.Physics
   {
     public bool CheckOverlap(Entities.GameObject obj, Entities.PlayerCube player)
     {
+      float playerLeft = player.PosX;
+      float playerRight = player.PosX + player.Width;
+      float playerTop = player.PosY;
+      float playerBottom = player.PosY + player.Height;
+
+      if (obj.Type == Entities.GameObject.ObjectType.Spike)
+      {
+        float playerShrinkWidth = player.Width * 0.35f;
+        float playerShrinkHeight = player.Height * 0.35f; 
+
+        playerLeft += playerShrinkWidth;
+        playerRight -= playerShrinkWidth;
+        playerTop += playerShrinkHeight;
+        playerBottom -= playerShrinkHeight;
+      }
+
       float objLeft = obj.PosX;
       float objRight = obj.PosX + obj.SizeX;
       float objTop = obj.PosY;
@@ -14,18 +30,18 @@ namespace GeometryDash.Engine.Physics
 
       if (obj.Type == Entities.GameObject.ObjectType.Spike)
       {
-        float shrinkWidth = obj.SizeX * 0.30f;  
-        float shrinkHeight = obj.SizeY * 0.50f; 
+        float spikeShrinkWidth = obj.SizeX * 0.30f;
+        float spikeShrinkHeight = obj.SizeY * 0.50f;
 
-        objLeft += shrinkWidth;
-        objRight -= shrinkWidth;
-        objTop += shrinkHeight;
+        objLeft += spikeShrinkWidth;
+        objRight -= spikeShrinkWidth;
+        objTop += spikeShrinkHeight;
       }
 
-      if (player.PosX + player.Width < objLeft) return false;
-      if (player.PosX > objRight) return false;
-      if (player.PosY + player.Height < objTop) return false;
-      if (player.PosY > objBottom) return false;
+      if (playerRight < objLeft) return false;
+      if (playerLeft > objRight) return false;
+      if (playerBottom < objTop) return false;
+      if (playerTop > objBottom) return false;
 
       return true;
     }
