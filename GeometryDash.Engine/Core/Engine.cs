@@ -56,7 +56,7 @@ namespace GeometryDash.Engine.Core
     private void Update(float deltaTime)
     {
       cameraX += 300f * deltaTime;
-      levelStreamer.UpdateStreaming(levelManager.Blueprints, cameraX, 1280f);
+      levelStreamer.UpdateStreaming(levelManager.Blueprints, cameraX, (float)(Raylib.GetScreenWidth()));
     }
 
     private void Render()
