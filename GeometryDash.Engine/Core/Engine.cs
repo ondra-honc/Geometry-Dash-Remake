@@ -53,6 +53,19 @@ namespace GeometryDash.Engine.Core
       Run();
     }
 
+    private void ResetLevel()
+    {
+      cube.IsDead = false;
+      cube.VelocityY = 0f;
+      cube.IsGrounded = true;
+      cube.PosY = floorY - Size;
+
+      cameraX = 0f;
+      cube.PosX = cameraX + 300f;
+
+      levelStreamer.Reset();
+    }
+
     private void Run()
     {
       while (isRunning && !Raylib.WindowShouldClose())
@@ -70,6 +83,12 @@ namespace GeometryDash.Engine.Core
 
     private void Update(float deltaTime)
     {
+      if (cube.IsDead)
+      {
+        ResetLevel();
+        return;
+      }
+      
       cameraX += 300f * deltaTime;
       cube.PosX = cameraX + 300f;
 
