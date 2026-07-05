@@ -11,6 +11,8 @@ namespace GeometryDash.Engine.Core
     public void Start()
     {
       Raylib.InitWindow(1280,720, "Geometry Dash Remake");
+      Raylib.ToggleBorderlessWindowed();
+      Raylib.SetTargetFPS((int)(GameSettings.targetFrameRate));
       
       timeStep = new TimeStep((int)(GameSettings.targetFrameRate));
       timeStep.Start();
@@ -21,7 +23,7 @@ namespace GeometryDash.Engine.Core
 
     private void Run()
     {
-      while (isRunning)
+      while (isRunning && !Raylib.WindowShouldClose())
       {
         int updateTicks = timeStep.GetRequiredUpdateTicks();
 
@@ -41,7 +43,12 @@ namespace GeometryDash.Engine.Core
 
     private void Render()
     {
-      //Drawing logic
+      Raylib.BeginDrawing();
+      Raylib.ClearBackground(Color.Blank);
+
+      //Draw
+
+      Raylib.EndDrawing();
     }
   }
 }
