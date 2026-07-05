@@ -24,7 +24,6 @@ namespace GeometryDash.Engine.Core
       
       levelManager = new World.LevelManager();
       levelManager.LoadLevel("level1.gdl");
-      Console.WriteLine($"DEBUG: Loaded {levelManager.Blueprints.Count} blueprints!");
 
       Entities.ObjectPool pool = new Entities.ObjectPool();
       levelStreamer = new World.LevelStreamer();
@@ -64,6 +63,15 @@ namespace GeometryDash.Engine.Core
     {
       Raylib.BeginDrawing();
       Raylib.ClearBackground(Color.SkyBlue);
+
+      int screenWidth = Raylib.GetScreenWidth();
+      int screenHeight = Raylib.GetScreenHeight();
+
+      int floorHeight = (int)(screenHeight * 0.20f);
+      int floorY = screenHeight - floorHeight; 
+
+      Raylib.DrawRectangle(0, floorY, screenWidth, floorHeight, Color.DarkBlue);
+      Raylib.DrawLine(0, floorY, screenWidth, floorY, Color.White);
 
       foreach (var obj in levelStreamer.ActiveObjects)
       {
