@@ -89,8 +89,8 @@ namespace GeometryDash.Engine.Core
         return;
       }
       
-      cameraX += 300f * deltaTime;
-      cube.PosX = cameraX + 300f;
+      cameraX += 500f * deltaTime;
+      cube.PosX = cameraX + 500f;
 
       levelStreamer.UpdateStreaming(levelManager.Blueprints, cameraX, (float)(Raylib.GetScreenWidth()));
 
@@ -157,7 +157,7 @@ namespace GeometryDash.Engine.Core
           //TODO
         }
       }
-      int playerScreenX = 300;
+      int playerScreenX = (int)(cube.PosX - cameraX);
       int playerScreenY = (int)cube.PosY;
 
       Raylib.DrawRectangle(playerScreenX, playerScreenY, Size, Size, Color.Green);
