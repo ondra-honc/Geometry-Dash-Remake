@@ -94,6 +94,8 @@ namespace GeometryDash.Engine.Core
 
       levelStreamer.UpdateStreaming(levelManager.Blueprints, cameraX, (float)(Raylib.GetScreenWidth()));
 
+      cube.IsGrounded = false;
+
       cube.VelocityY += GameSettings.gravityForce * deltaTime;
       cube.PosY += cube.VelocityY * deltaTime;
 
