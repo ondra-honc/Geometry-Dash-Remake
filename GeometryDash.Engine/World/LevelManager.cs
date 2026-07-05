@@ -11,6 +11,8 @@
   {
     private readonly List<LevelData> levelData = new List<LevelData>();
 
+    public IReadOnlyList<LevelData> Blueprints => levelData;
+
     public void LoadLevel(string filePath)
     {
       if (!File.Exists(filePath)) return;
@@ -32,6 +34,8 @@
           }
         }
       }
+
+      levelData.Sort((a, b) => a.X.CompareTo(b.X));
     }
   }
 }
