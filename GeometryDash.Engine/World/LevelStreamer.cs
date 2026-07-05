@@ -49,5 +49,11 @@ namespace GeometryDash.Engine.World
         }
       }
     }
+
+    public void Reset()
+    {
+      activeObjects.Clear();
+      nextBlueprintIndex = 0;
+    }
   }
 }
