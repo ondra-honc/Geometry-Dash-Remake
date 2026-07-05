@@ -1,5 +1,8 @@
-﻿using System.Diagnostics;
+﻿using GeometryDash.Engine.Entities;
+using GeometryDash.Engine.World;
 using Raylib_cs;
+using System.Diagnostics;
+using System.Numerics;
 
 namespace GeometryDash.Engine.Core
 {
@@ -7,12 +10,27 @@ namespace GeometryDash.Engine.Core
   {
     private bool isRunning;
     private TimeStep timeStep;
+    private World.LevelManager levelManager;
+    private World.LevelStreamer levelStreamer;
+    private float cameraX = 0f;
+    private const int Size = 40;
+    private Entities.PlayerCube cube;
 
     public void Start()
     {
       Raylib.InitWindow(1280,720, "Geometry Dash Remake");
       Raylib.ToggleBorderlessWindowed();
       Raylib.SetTargetFPS((int)(GameSettings.targetFrameRate));
+      
+      levelManager = new World.LevelManager();
+      levelManager.LoadLevel("level1.gdl");
+      Console.WriteLine($"DEBUG: Loaded {levelManager.Blueprints.Count} blueprints!");
+
+      Entities.ObjectPool pool = new Entities.ObjectPool();
+      levelStreamer = new World.LevelStreamer();
+      levelStreamer.Initialize(pool);
+
+      cube = new Entities.PlayerCube(0f, 350f);
       
       timeStep = new TimeStep((int)(GameSettings.targetFrameRate));
       timeStep.Start();
@@ -38,16 +56,42 @@ namespace GeometryDash.Engine.Core
 
     private void Update(float deltaTime)
     {
-      //Physics, etc.
+      cameraX += 300f * deltaTime;
+      levelStreamer.UpdateStreaming(levelManager.Blueprints, cameraX, 1280f);
     }
 
     private void Render()
     {
       Raylib.BeginDrawing();
-      Raylib.ClearBackground(Color.Blank);
+      Raylib.ClearBackground(Color.SkyBlue);
 
-      //Draw
+      foreach (var obj in levelStreamer.ActiveObjects)
+      {
+        int screenX = (int)(obj.PosX - cameraX);
+        int screenY = (int)obj.PosY;
 
+        if (obj.Type == GameObject.ObjectType.SolidBlock)
+        {
+          Raylib.DrawRectangle(screenX, screenY, Size, Size, Color.Gray);
+          Raylib.DrawRectangleLines(screenX, screenY, Size, Size, Color.White);
+        }
+        else if (obj.Type == GameObject.ObjectType.Spike)
+        {
+          Vector2 top = new Vector2(screenX + (Size / 2f), screenY);
+          Vector2 bottomLeft = new Vector2(screenX, screenY + Size);
+          Vector2 bottomRight = new Vector2(screenX + Size, screenY + Size);
+
+          Raylib.DrawTriangle(top, bottomLeft, bottomRight, Color.Red);
+        }
+        else if (obj.Type == GameObject.ObjectType.JumpPad)
+        {
+          //TODO
+        }
+      }
+      int playerScreenX = 200;
+      int playerScreenY = (int)cube.PosY;
+
+      Raylib.DrawRectangle(playerScreenX, playerScreenY, Size, Size, Color.Green);
       Raylib.EndDrawing();
     }
   }

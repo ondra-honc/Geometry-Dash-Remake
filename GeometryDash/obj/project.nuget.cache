@@ -1,8 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "jxl6bbHddOc=",
+  "dgSpecHash": "oYxMad5WV40=",
   "success": true,
   "projectFilePath": "C:\\Users\\Ondra\\source\\repos\\GeometryDash\\GeometryDash\\GeometryDash.csproj",
-  "expectedPackageFiles": [],
+  "expectedPackageFiles": [
+    "C:\\Users\\Ondra\\.nuget\\packages\\raylib-cs\\8.0.0\\raylib-cs.8.0.0.nupkg.sha512"
+  ],
   "logs": []
 }

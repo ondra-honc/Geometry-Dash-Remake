@@ -26,6 +26,8 @@ namespace GeometryDash.Engine.World
 
         obj.PosX = data.X;
         obj.PosY = data.Y;
+        obj.Type = (GameObject.ObjectType)data.TypeId;
+
         activeObjects.Add(obj);
 
         nextBlueprintIndex++;
