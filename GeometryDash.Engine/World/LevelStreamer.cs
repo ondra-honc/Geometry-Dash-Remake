@@ -19,13 +19,18 @@ namespace GeometryDash.Engine.World
 
     public void UpdateStreaming(IReadOnlyList<LevelData> blueprints, float cameraX, float screenWidth)
     {
+      int screenHeight = Raylib_cs.Raylib.GetScreenHeight();
+      int floorY = screenHeight - (int)(screenHeight * 0.20f);
+
+      int Size = 40;
+
       while (nextBlueprintIndex < blueprints.Count && blueprints[nextBlueprintIndex].X < cameraX + screenWidth + 200)
       {
         LevelData data = blueprints[nextBlueprintIndex];
         Entities.GameObject obj = pool.Get();
 
         obj.PosX = data.X;
-        obj.PosY = data.Y;
+        obj.PosY = floorY - Size - (data.Y * Size);
         obj.Type = (GameObject.ObjectType)data.TypeId;
 
         activeObjects.Add(obj);
