@@ -157,7 +157,7 @@ namespace GeometryDash.Engine.Core
           //TODO
         }
       }
-      int playerScreenX = (int)(cube.PosX - cameraX);
+      int playerScreenX = (int)(cube.PosX - cameraX); 
       int playerScreenY = (int)cube.PosY;
 
       Raylib.DrawRectangle(playerScreenX, playerScreenY, Size, Size, Color.Green);
