@@ -53,16 +53,35 @@ namespace GeometryDash.Engine.Physics
       switch (obj.Type)
       {
         case Entities.GameObject.ObjectType.SolidBlock:
-          bool isFalling = player.VelocityY >= 0;
-          bool wasAbove = (player.PosY + player.Height) - player.VelocityY <= obj.PosY + 1f;
+          float overlapLeft = (player.PosX + player.Width) - obj.PosX;
+          float overlapRight = (obj.PosX + obj.SizeX) - player.PosX;
+          float overlapTop = (player.PosY + player.Height) - obj.PosY;
+          float overlapBottom = (obj.PosY + obj.SizeY) - player.PosY;
 
-          if (isFalling && wasAbove)
+          float minOverlapX = Math.Min(overlapLeft, overlapRight);
+          float minOverlapY = Math.Min(overlapTop, overlapBottom);
+
+          if (minOverlapY < minOverlapX)
           {
-            player.PosY = obj.PosY - player.Height; 
-            player.VelocityY = 0f;                  
-            player.IsGrounded = true;
-          } else player.IsDead = true;
-
+            if (player.VelocityY >= 0 && overlapTop < overlapBottom)
+            {
+              player.PosY = obj.PosY - player.Height;
+              player.VelocityY = 0f;
+              player.IsGrounded = true;
+            }
+            else if (player.VelocityY < 0 && overlapBottom < overlapTop)
+            {
+              player.PosY = obj.PosY + obj.SizeY;
+              player.VelocityY = 0f; 
+            }
+          }
+          else
+          {
+            if (overlapLeft < overlapRight)
+            {
+              player.IsDead = true;
+            }
+          }
           break;
 
         case Entities.GameObject.ObjectType.Spike:
