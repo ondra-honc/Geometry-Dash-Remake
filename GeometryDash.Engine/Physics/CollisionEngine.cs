@@ -71,8 +71,7 @@ namespace GeometryDash.Engine.Physics
             }
             else if (player.VelocityY < 0 && overlapBottom < overlapTop)
             {
-              player.PosY = obj.PosY + obj.SizeY;
-              player.VelocityY = 0f; 
+              player.IsDead = true;
             }
           }
           else
