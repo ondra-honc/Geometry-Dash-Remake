@@ -92,7 +92,7 @@ namespace GeometryDash.Engine.Core
         return;
       }
 
-      cameraX += 500f * deltaTime;
+      cameraX += 400f * deltaTime;
       cube.PosX = cameraX + 500f;
 
       levelStreamer.UpdateStreaming(levelManager.Blueprints, cameraX, (float)(Raylib.GetScreenWidth()));
