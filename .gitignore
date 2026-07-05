@@ -1,0 +1,8 @@
+# Ignore .NET build outputs
+bin/
+obj/
+
+# User-specific files and IDE caches
+.vs/
+*.user
+*.suo
