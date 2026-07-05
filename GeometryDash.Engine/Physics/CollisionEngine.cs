@@ -7,13 +7,25 @@ namespace GeometryDash.Engine.Physics
   {
     public bool CheckOverlap(Entities.GameObject obj, Entities.PlayerCube player)
     {
-      if (player.PosX + player.Width < obj.PosX) return false;
+      float objLeft = obj.PosX;
+      float objRight = obj.PosX + obj.SizeX;
+      float objTop = obj.PosY;
+      float objBottom = obj.PosY + obj.SizeY;
 
-      if (player.PosX > obj.PosX + obj.SizeX) return false;
+      if (obj.Type == Entities.GameObject.ObjectType.Spike)
+      {
+        float shrinkWidth = obj.SizeX * 0.30f;  
+        float shrinkHeight = obj.SizeY * 0.50f; 
 
-      if (player.PosY + player.Height < obj.PosY) return false;
+        objLeft += shrinkWidth;
+        objRight -= shrinkWidth;
+        objTop += shrinkHeight;
+      }
 
-      if (player.PosY > obj.PosY + obj.SizeY) return false;
+      if (player.PosX + player.Width < objLeft) return false;
+      if (player.PosX > objRight) return false;
+      if (player.PosY + player.Height < objTop) return false;
+      if (player.PosY > objBottom) return false;
 
       return true;
     }
