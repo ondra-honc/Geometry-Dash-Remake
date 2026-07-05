@@ -17,6 +17,7 @@ namespace GeometryDash.Engine.Core
     private const int Size = 80;
     private Entities.PlayerCube cube;
     private Physics.CollisionEngine collisionEngine;
+    private int attemptCounter = 1;
 
     public int screenWidth;
     public int screenHeight;
@@ -55,6 +56,8 @@ namespace GeometryDash.Engine.Core
 
     private void ResetLevel()
     {
+      attemptCounter++;
+
       cube.IsDead = false;
       cube.VelocityY = 0f;
       cube.IsGrounded = true;
@@ -88,7 +91,7 @@ namespace GeometryDash.Engine.Core
         ResetLevel();
         return;
       }
-      
+
       cameraX += 500f * deltaTime;
       cube.PosX = cameraX + 500f;
 
@@ -129,6 +132,8 @@ namespace GeometryDash.Engine.Core
     {
       Raylib.BeginDrawing();
       Raylib.ClearBackground(Color.SkyBlue);
+      
+      Raylib.DrawText($"Attempt: {attemptCounter}", -(int)(cameraX) + 650, floorY - 350, 60, Color.White);
 
       
       Raylib.DrawRectangle(0, floorY, screenWidth, floorHeight, Color.DarkBlue);
@@ -161,6 +166,7 @@ namespace GeometryDash.Engine.Core
       int playerScreenY = (int)cube.PosY;
 
       Raylib.DrawRectangle(playerScreenX, playerScreenY, Size, Size, Color.Green);
+
       Raylib.EndDrawing();
     }
   }
