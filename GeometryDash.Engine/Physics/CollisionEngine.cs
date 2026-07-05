@@ -30,8 +30,8 @@ namespace GeometryDash.Engine.Physics
 
       if (obj.Type == Entities.GameObject.ObjectType.Spike)
       {
-        float spikeShrinkWidth = obj.SizeX * 0.30f;
-        float spikeShrinkHeight = obj.SizeY * 0.50f;
+        float spikeShrinkWidth = obj.SizeX * 0.02f;
+        float spikeShrinkHeight = obj.SizeY * 0.12f;
 
         objLeft += spikeShrinkWidth;
         objRight -= spikeShrinkWidth;
