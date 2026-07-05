@@ -10,6 +10,8 @@ namespace GeometryDash.Engine.Core
 
     public void Start()
     {
+      Raylib.InitWindow(1280,720, "Geometry Dash Remake");
+      
       timeStep = new TimeStep((int)(GameSettings.targetFrameRate));
       timeStep.Start();
       isRunning = true;
