@@ -19,4 +19,5 @@ GeometryDash.Engine/
 ├── Physics/
 │   └── CollisionEngine.cs  # AABB collision detection and state tracking
 └──World/
+    ├── LevelStreamer.cs # Used for streaming the level data into Engine.cs for rendering
     └── LevelManager.cs  # Loading level data with pretedermined structure
