@@ -12,10 +12,6 @@ namespace GeometryDash.Engine.Entities
     public float Width { get; } = 40f;
     public float Height { get; } = 40f;
 
-    private const float Gravity = Core.GameSettings.gravityForce;    
-    private const float JumpForce = Core.GameSettings.jumpImpulse;  
-    private const float FloorY = Core.GameSettings.floorHeight;
-
     public PlayerCube(float startX, float startY)
     {
       PosX = startX;
