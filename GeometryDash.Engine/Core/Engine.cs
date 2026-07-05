@@ -3,6 +3,7 @@ using GeometryDash.Engine.World;
 using Raylib_cs;
 using System.Diagnostics;
 using System.Numerics;
+using GeometryDash.Engine.Physics;
 
 namespace GeometryDash.Engine.Core
 {
@@ -15,6 +16,7 @@ namespace GeometryDash.Engine.Core
     private float cameraX = 0f;
     private const int Size = 80;
     private Entities.PlayerCube cube;
+    private Physics.CollisionEngine collisionEngine;
 
     public int screenWidth;
     public int screenHeight;
@@ -31,6 +33,8 @@ namespace GeometryDash.Engine.Core
       screenHeight = Raylib.GetScreenHeight();
       floorHeight = (int)(screenHeight * GameSettings.floorFloat);
       floorY = screenHeight - floorHeight;
+
+      collisionEngine = new Physics.CollisionEngine();
 
       levelManager = new World.LevelManager();
       levelManager.LoadLevel("level1.gdl");
@@ -67,10 +71,11 @@ namespace GeometryDash.Engine.Core
     private void Update(float deltaTime)
     {
       cameraX += 300f * deltaTime;
+      cube.PosX = cameraX + 300f;
+
       levelStreamer.UpdateStreaming(levelManager.Blueprints, cameraX, (float)(Raylib.GetScreenWidth()));
 
       cube.VelocityY += GameSettings.gravityForce * deltaTime;
-
       cube.PosY += cube.VelocityY * deltaTime;
 
       float groundLevelY = floorY - Size;
@@ -81,6 +86,17 @@ namespace GeometryDash.Engine.Core
         cube.IsGrounded = true;
       }
 
+      foreach (var obj in levelStreamer.ActiveObjects)
+      {
+        obj.SizeX = Size;
+        obj.SizeY = Size;
+
+        if (collisionEngine.CheckOverlap(obj, cube))
+        {
+          collisionEngine.ResolveCollision(obj, cube);
+        }
+      }
+      
       if (cube.IsGrounded && (Raylib.IsKeyDown(KeyboardKey.Space) || Raylib.IsMouseButtonDown(MouseButton.Left)))
       {
         cube.VelocityY = GameSettings.jumpImpulse;
