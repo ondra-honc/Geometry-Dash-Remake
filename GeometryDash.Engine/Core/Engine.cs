@@ -40,6 +40,7 @@ namespace GeometryDash.Engine.Core
       levelStreamer.Initialize(pool);
 
       cube = new Entities.PlayerCube(0f, floorY - Size);
+      cube.IsGrounded = true;
       
       timeStep = new TimeStep((int)(GameSettings.targetFrameRate));
       timeStep.Start();
@@ -67,6 +68,24 @@ namespace GeometryDash.Engine.Core
     {
       cameraX += 300f * deltaTime;
       levelStreamer.UpdateStreaming(levelManager.Blueprints, cameraX, (float)(Raylib.GetScreenWidth()));
+
+      cube.VelocityY += GameSettings.gravityForce * deltaTime;
+
+      cube.PosY += cube.VelocityY * deltaTime;
+
+      float groundLevelY = floorY - Size;
+      if (cube.PosY >= groundLevelY)
+      {
+        cube.PosY = groundLevelY; 
+        cube.VelocityY = 0f;
+        cube.IsGrounded = true;
+      }
+
+      if (cube.IsGrounded && (Raylib.IsKeyDown(KeyboardKey.Space) || Raylib.IsMouseButtonDown(MouseButton.Left)))
+      {
+        cube.VelocityY = GameSettings.jumpImpulse;
+        cube.IsGrounded = false;
+      }
     }
 
     private void Render()
