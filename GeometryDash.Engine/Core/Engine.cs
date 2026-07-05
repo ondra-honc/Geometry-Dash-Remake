@@ -13,7 +13,7 @@ namespace GeometryDash.Engine.Core
     private World.LevelManager levelManager;
     private World.LevelStreamer levelStreamer;
     private float cameraX = 0f;
-    private const int Size = 40;
+    private const int Size = 80;
     private Entities.PlayerCube cube;
 
     public int screenWidth;
@@ -29,7 +29,7 @@ namespace GeometryDash.Engine.Core
 
       screenWidth = Raylib.GetScreenWidth();
       screenHeight = Raylib.GetScreenHeight();
-      floorHeight = (int)(screenHeight * 0.20f);
+      floorHeight = (int)(screenHeight * GameSettings.floorFloat);
       floorY = screenHeight - floorHeight;
 
       levelManager = new World.LevelManager();
@@ -120,7 +120,7 @@ namespace GeometryDash.Engine.Core
           //TODO
         }
       }
-      int playerScreenX = 200;
+      int playerScreenX = 300;
       int playerScreenY = (int)cube.PosY;
 
       Raylib.DrawRectangle(playerScreenX, playerScreenY, Size, Size, Color.Green);

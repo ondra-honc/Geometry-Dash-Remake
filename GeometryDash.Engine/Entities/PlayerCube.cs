@@ -9,8 +9,8 @@ namespace GeometryDash.Engine.Entities
     public float VelocityY {  get; set; }
     public bool IsGrounded { get; internal set; }
     public bool IsDead { get; set; }
-    public float Width { get; } = 40f;
-    public float Height { get; } = 40f;
+    public float Width { get; } = 80f;
+    public float Height { get; } = 80f;
 
     public PlayerCube(float startX, float startY)
     {

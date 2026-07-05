@@ -1,4 +1,5 @@
-﻿using GeometryDash.Engine.Entities;
+﻿using GeometryDash.Engine.Core;
+using GeometryDash.Engine.Entities;
 
 namespace GeometryDash.Engine.World
 {
@@ -20,9 +21,9 @@ namespace GeometryDash.Engine.World
     public void UpdateStreaming(IReadOnlyList<LevelData> blueprints, float cameraX, float screenWidth)
     {
       int screenHeight = Raylib_cs.Raylib.GetScreenHeight();
-      int floorY = screenHeight - (int)(screenHeight * 0.20f);
+      int floorY = screenHeight - (int)(screenHeight * GameSettings.floorFloat);
 
-      int Size = 40;
+      int Size = 80;
 
       while (nextBlueprintIndex < blueprints.Count && blueprints[nextBlueprintIndex].X < cameraX + screenWidth + 200)
       {

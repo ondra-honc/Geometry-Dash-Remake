@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("GeometryDash")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+f2a142f2c63765910e07d2d03a3742aed3039b0a")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+887f3a5526cc5176a2dd0841a5510c6f51de1f87")]
 [assembly: System.Reflection.AssemblyProductAttribute("GeometryDash")]
 [assembly: System.Reflection.AssemblyTitleAttribute("GeometryDash")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
