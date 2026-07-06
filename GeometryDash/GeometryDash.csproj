@@ -15,10 +15,10 @@
     <PackageReference Include="Raylib-cs" Version="8.0.0" />
   </ItemGroup>
 
-  <ItemGroup>
-    <None Update="level1.gdl">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-  </ItemGroup>
+	<ItemGroup>
+		<None Update="Assets\**\*.*">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</None>
+	</ItemGroup>
 
 </Project>
