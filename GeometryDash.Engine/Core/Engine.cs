@@ -19,6 +19,7 @@ namespace GeometryDash.Engine.Core
     private Physics.CollisionEngine collisionEngine;
     private int attemptCounter = 1;
     private Texture2D cubeTexture;
+    private float rotationAngle = 0f;
 
     public int screenWidth;
     public int screenHeight;
@@ -70,6 +71,8 @@ namespace GeometryDash.Engine.Core
       cameraX = 0f;
       cube.PosX = cameraX + 300f;
 
+      rotationAngle = 0f;
+
       levelStreamer.Reset();
     }
 
@@ -103,6 +106,12 @@ namespace GeometryDash.Engine.Core
 
       levelStreamer.UpdateStreaming(levelManager.Blueprints, cameraX, (float)(Raylib.GetScreenWidth()));
 
+      if (!cube.IsGrounded)
+      {
+        rotationAngle += 200f * deltaTime;
+        rotationAngle %= 360f; 
+      }
+
       cube.IsGrounded = false;
 
       cube.VelocityY += GameSettings.gravityForce * deltaTime;
@@ -113,6 +122,13 @@ namespace GeometryDash.Engine.Core
       {
         cube.PosY = groundLevelY; 
         cube.VelocityY = 0f;
+
+        if (!cube.IsGrounded)
+        {
+          rotationAngle = (float)Math.Round(rotationAngle / 90f) * 90f;
+          rotationAngle %= 360f;
+        }
+
         cube.IsGrounded = true;
       }
 
@@ -179,12 +195,20 @@ namespace GeometryDash.Engine.Core
       float playerCenterX = playerScreenX + halfSize;
       float playerCenterY = playerScreenY + halfSize;
 
+      float smoothRotationAngle = rotationAngle;
+      if (!cube.IsGrounded)
+      {
+        // Predict the rotation between physics ticks for flawless smoothness
+        smoothRotationAngle = rotationAngle + (450f * timeStep.FixedDeltaTime * alpha);
+        smoothRotationAngle %= 360f;
+      }
+
       Raylib.DrawTexturePro(
         cube.Texture,
         new Rectangle(0, 0, cube.Texture.Width, cube.Texture.Height),
         new Rectangle(playerCenterX, playerCenterY, Size, Size), 
         new Vector2(halfSize, halfSize),                      
-        0f,
+        smoothRotationAngle,
         Color.White
       );
 
