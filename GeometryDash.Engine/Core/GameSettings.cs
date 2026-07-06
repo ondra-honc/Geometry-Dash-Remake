@@ -9,8 +9,8 @@
     public const float targetUpdate = 1f / targetFrameRate;
 
     public const float cubeHorizontalSpeed = 450f;
-    public const float gravityForce = 2000f;
-    public const float jumpImpulse = -900f;
+    public const float gravityForce = 5300f;
+    public const float jumpImpulse = -1500f;
     public const float jumpPadForce = 1500f;
     public const float floorFloat = 0.28333f;
   }

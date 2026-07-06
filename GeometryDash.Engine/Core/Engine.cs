@@ -20,7 +20,7 @@ namespace GeometryDash.Engine.Core
     private int attemptCounter = 1;
     private Texture2D cubeTexture;
     private float rotationAngle = 0f;
-    private float currentRotationSpeed = 200f;
+    private float currentRotationSpeed = 350f;
 
     public int screenWidth;
     public int screenHeight;
@@ -102,7 +102,7 @@ namespace GeometryDash.Engine.Core
         return;
       }
 
-      cameraX += 400f * deltaTime;
+      cameraX += 700f * deltaTime;
       cube.PosX = cameraX + 500f;
 
       levelStreamer.UpdateStreaming(levelManager.Blueprints, cameraX, (float)(Raylib.GetScreenWidth()));
@@ -164,7 +164,7 @@ namespace GeometryDash.Engine.Core
         cube.IsGrounded = false;
 
         float airTime = MathF.Abs(2f * GameSettings.jumpImpulse / GameSettings.gravityForce);
-        float estimatedTotalRotation = 200f * airTime;
+        float estimatedTotalRotation = 350f * airTime;
         float perfectTargetRotation = MathF.Round(estimatedTotalRotation / 90f) * 90f;
         if (perfectTargetRotation < 90f) perfectTargetRotation = 180f;
 
