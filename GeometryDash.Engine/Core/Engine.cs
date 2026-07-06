@@ -113,6 +113,8 @@ namespace GeometryDash.Engine.Core
         rotationAngle %= 360f; 
       }
 
+      bool wasAirborneLastFrame = !cube.IsGrounded;
+
       cube.IsGrounded = false;
 
       cube.VelocityY += GameSettings.gravityForce * deltaTime;
@@ -143,18 +145,21 @@ namespace GeometryDash.Engine.Core
           collisionEngine.ResolveCollision(obj, cube);
         }
       }
-      
+
+      if (wasAirborneLastFrame && cube.IsGrounded)
+      {
+        rotationAngle = MathF.Round(rotationAngle / 90f) * 90f;
+        rotationAngle %= 360f;
+      }
+
       if (cube.IsGrounded && (Raylib.IsKeyDown(KeyboardKey.Space) || Raylib.IsMouseButtonDown(MouseButton.Left)))
       {
         cube.VelocityY = GameSettings.jumpImpulse;
         cube.IsGrounded = false;
 
         float airTime = MathF.Abs(2f * GameSettings.jumpImpulse / GameSettings.gravityForce);
-
         float estimatedTotalRotation = 200f * airTime;
-
         float perfectTargetRotation = MathF.Round(estimatedTotalRotation / 90f) * 90f;
-
         if (perfectTargetRotation < 90f) perfectTargetRotation = 180f;
 
         currentRotationSpeed = perfectTargetRotation / airTime;
