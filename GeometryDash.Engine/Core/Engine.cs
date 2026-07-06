@@ -55,6 +55,8 @@ namespace GeometryDash.Engine.Core
       isRunning = true;
 
       Run();
+
+      Raylib.UnloadTexture(cubeTexture);
     }
 
     private void ResetLevel()
