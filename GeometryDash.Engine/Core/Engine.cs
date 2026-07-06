@@ -20,6 +20,7 @@ namespace GeometryDash.Engine.Core
     private int attemptCounter = 1;
     private Texture2D cubeTexture;
     private float rotationAngle = 0f;
+    private float currentRotationSpeed = 200f;
 
     public int screenWidth;
     public int screenHeight;
@@ -108,7 +109,7 @@ namespace GeometryDash.Engine.Core
 
       if (!cube.IsGrounded)
       {
-        rotationAngle += 200f * deltaTime;
+        rotationAngle += currentRotationSpeed * deltaTime;
         rotationAngle %= 360f; 
       }
 
@@ -125,7 +126,7 @@ namespace GeometryDash.Engine.Core
 
         if (!cube.IsGrounded)
         {
-          rotationAngle = (float)Math.Round(rotationAngle / 90f) * 90f;
+          rotationAngle = MathF.Round(rotationAngle / 90f) * 90f;
           rotationAngle %= 360f;
         }
 
@@ -147,6 +148,16 @@ namespace GeometryDash.Engine.Core
       {
         cube.VelocityY = GameSettings.jumpImpulse;
         cube.IsGrounded = false;
+
+        float airTime = MathF.Abs(2f * GameSettings.jumpImpulse / GameSettings.gravityForce);
+
+        float estimatedTotalRotation = 200f * airTime;
+
+        float perfectTargetRotation = MathF.Round(estimatedTotalRotation / 90f) * 90f;
+
+        if (perfectTargetRotation < 90f) perfectTargetRotation = 180f;
+
+        currentRotationSpeed = perfectTargetRotation / airTime;
       }
     }
 
@@ -199,7 +210,7 @@ namespace GeometryDash.Engine.Core
       if (!cube.IsGrounded)
       {
         // Predict the rotation between physics ticks for flawless smoothness
-        smoothRotationAngle = rotationAngle + (450f * timeStep.FixedDeltaTime * alpha);
+        smoothRotationAngle = rotationAngle + (currentRotationSpeed * timeStep.FixedDeltaTime * alpha);
         smoothRotationAngle %= 360f;
       }
 
