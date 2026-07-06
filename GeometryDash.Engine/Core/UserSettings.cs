@@ -2,6 +2,6 @@
 {
   public class UserSettings
   {
-    public const string cubeTextureString = "cube.png";
+    public const string cubeTextureString = "Assets/Textures/cube.png";
   }
 }

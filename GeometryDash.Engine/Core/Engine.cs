@@ -39,7 +39,7 @@ namespace GeometryDash.Engine.Core
       collisionEngine = new Physics.CollisionEngine();
 
       levelManager = new World.LevelManager();
-      levelManager.LoadLevel("level1.gdl");
+      levelManager.LoadLevel("Assets/Levels/level1.gdl");
 
       Entities.ObjectPool pool = new Entities.ObjectPool();
       levelStreamer = new World.LevelStreamer();
