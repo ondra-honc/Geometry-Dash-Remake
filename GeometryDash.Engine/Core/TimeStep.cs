@@ -35,6 +35,11 @@ namespace GeometryDash.Engine.Core
       return ticks;
     }
 
+    public float GetAlpha()
+    {
+      return (float)(_accumulatedTime / _targetFrameTime);
+    }
+
     public float FixedDeltaTime => (float)_targetFrameTime;
   }
 }

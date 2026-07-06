@@ -29,7 +29,6 @@ namespace GeometryDash.Engine.Core
     {
       Raylib.InitWindow(1280,720, "Geometry Dash Remake");
       Raylib.ToggleBorderlessWindowed();
-      Raylib.SetTargetFPS((int)(GameSettings.targetFrameRate));
 
       screenWidth = Raylib.GetScreenWidth();
       screenHeight = Raylib.GetScreenHeight();
@@ -85,7 +84,9 @@ namespace GeometryDash.Engine.Core
           Update(timeStep.FixedDeltaTime);
         }
 
-        Render();
+        float alpha = timeStep.GetAlpha(); 
+
+        Render(alpha);
       }
     }
 
@@ -133,12 +134,14 @@ namespace GeometryDash.Engine.Core
       }
     }
 
-    private void Render()
+    private void Render(float alpha)
     {
       Raylib.BeginDrawing();
       Raylib.ClearBackground(Color.SkyBlue);
-      
-      Raylib.DrawText($"Attempt: {attemptCounter}", -(int)(cameraX) + 650, floorY - 350, 60, Color.White);
+
+      float smoothCameraX = cameraX + (400f * timeStep.FixedDeltaTime * alpha);
+
+      Raylib.DrawText($"Attempt: {attemptCounter}", -(int)(smoothCameraX) + 650, floorY - 350, 60, Color.White);
 
       
       Raylib.DrawRectangle(0, floorY, screenWidth, floorHeight, Color.DarkBlue);
@@ -146,7 +149,7 @@ namespace GeometryDash.Engine.Core
 
       foreach (var obj in levelStreamer.ActiveObjects)
       {
-        int screenX = (int)(obj.PosX - cameraX);
+        int screenX = (int)Math.Round(obj.PosX - smoothCameraX);
         int screenY = (int)obj.PosY;
 
         if (obj.Type == GameObject.ObjectType.SolidBlock)
@@ -167,7 +170,9 @@ namespace GeometryDash.Engine.Core
           //TODO
         }
       }
-      int playerScreenX = (int)(cube.PosX - cameraX); 
+
+      float smoothPlayerX = smoothCameraX + 500f;
+      int playerScreenX = (int)Math.Round(smoothPlayerX - smoothCameraX);
       int playerScreenY = (int)cube.PosY;
 
       Raylib.DrawTexturePro(
@@ -177,7 +182,7 @@ namespace GeometryDash.Engine.Core
         new Vector2(0, 0),
         0f,
         Color.White
-      );                                 
+      );
 
       Raylib.EndDrawing();
     }
