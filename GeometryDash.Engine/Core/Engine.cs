@@ -168,7 +168,14 @@ namespace GeometryDash.Engine.Core
       int playerScreenX = (int)(cube.PosX - cameraX); 
       int playerScreenY = (int)cube.PosY;
 
-      Raylib.DrawRectangle(playerScreenX, playerScreenY, Size, Size, Color.Green);
+      Raylib.DrawTexturePro(
+        cube.Texture,
+        new Rectangle(0, 0, cube.Texture.Width, cube.Texture.Height),
+        new Rectangle(playerScreenX, playerScreenY, Size, Size),
+        new Vector2(0, 0),
+        0f,
+        Color.White
+      );                                 
 
       Raylib.EndDrawing();
     }
