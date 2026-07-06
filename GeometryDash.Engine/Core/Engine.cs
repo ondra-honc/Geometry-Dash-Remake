@@ -18,6 +18,7 @@ namespace GeometryDash.Engine.Core
     private Entities.PlayerCube cube;
     private Physics.CollisionEngine collisionEngine;
     private int attemptCounter = 1;
+    private Texture2D cubeTexture;
 
     public int screenWidth;
     public int screenHeight;
@@ -44,7 +45,9 @@ namespace GeometryDash.Engine.Core
       levelStreamer = new World.LevelStreamer();
       levelStreamer.Initialize(pool);
 
-      cube = new Entities.PlayerCube(0f, floorY - Size);
+
+      cubeTexture = Raylib.LoadTexture(UserSettings.cubeTextureString);
+      cube = new Entities.PlayerCube(0f, floorY - Size, cubeTexture);
       cube.IsGrounded = true;
       
       timeStep = new TimeStep((int)(GameSettings.targetFrameRate));
