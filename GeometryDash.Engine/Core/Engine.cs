@@ -146,10 +146,16 @@ namespace GeometryDash.Engine.Core
         }
       }
 
-      if (wasAirborneLastFrame && cube.IsGrounded)
+      if (cube.IsGrounded)
       {
-        rotationAngle = MathF.Round(rotationAngle / 90f) * 90f;
-        rotationAngle %= 360f;
+        float targetAngle = MathF.Round(rotationAngle / 90f) * 90f;
+
+        rotationAngle += (targetAngle - rotationAngle) * 40f * deltaTime;
+
+        if (MathF.Abs(targetAngle - rotationAngle) < 0.1f)
+        {
+          rotationAngle = targetAngle % 360f;
+        }
       }
 
       if (cube.IsGrounded && (Raylib.IsKeyDown(KeyboardKey.Space) || Raylib.IsMouseButtonDown(MouseButton.Left)))
