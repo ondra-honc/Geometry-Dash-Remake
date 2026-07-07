@@ -1,17 +1,18 @@
 ﻿using GeometryDash.Engine.Core;
 using GeometryDash.Engine.Entities;
+using static GeometryDash.Engine.Shared.Enums;
 
 namespace GeometryDash.Engine.World
 {
   public class LevelStreamer
   {
-    private readonly List<Entities.GameObject> activeObjects = new List<Entities.GameObject>();
+    private readonly List<GameObject> activeObjects = new List<GameObject>();
     private int nextBlueprintIndex = 0;
-    private Entities.ObjectPool pool;
+    private ObjectPool pool;
 
-    public IReadOnlyList<Entities.GameObject> ActiveObjects => activeObjects;
+    public IReadOnlyList<GameObject> ActiveObjects => activeObjects;
 
-    public void Initialize(Entities.ObjectPool pol)
+    public void Initialize(ObjectPool pol)
     {
       pool = pol;
       nextBlueprintIndex = 0;
@@ -28,11 +29,11 @@ namespace GeometryDash.Engine.World
       while (nextBlueprintIndex < blueprints.Count && blueprints[nextBlueprintIndex].X < cameraX + screenWidth + 200)
       {
         LevelData data = blueprints[nextBlueprintIndex];
-        Entities.GameObject obj = pool.Get();
+        GameObject obj = pool.Get();
 
         obj.PosX = data.X;
         obj.PosY = floorY - Size - (data.Y * Size);
-        obj.Type = (GameObject.ObjectType)data.TypeId;
+        obj.Type = (ObjectType)data.TypeId;
 
         activeObjects.Add(obj);
 

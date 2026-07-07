@@ -1,9 +1,10 @@
 ﻿using GeometryDash.Engine.Entities;
+using GeometryDash.Engine.Physics;
 using GeometryDash.Engine.World;
+using static GeometryDash.Engine.Shared.Enums;
 using Raylib_cs;
 using System.Diagnostics;
 using System.Numerics;
-using GeometryDash.Engine.Physics;
 
 namespace GeometryDash.Engine.Core
 {
@@ -11,16 +12,17 @@ namespace GeometryDash.Engine.Core
   {
     private bool isRunning;
     private TimeStep timeStep;
-    private World.LevelManager levelManager;
-    private World.LevelStreamer levelStreamer;
+    private LevelManager levelManager;
+    private LevelStreamer levelStreamer;
     private float cameraX = 0f;
     private const int Size = 80;
-    private Entities.PlayerCube cube;
-    private Physics.CollisionEngine collisionEngine;
+    private PlayerCube cube;
+    private CollisionEngine collisionEngine;
     private int attemptCounter = 1;
     private Texture2D cubeTexture;
     private float rotationAngle = 0f;
     private float currentRotationSpeed = 350f;
+    private GameState currentState = GameState.MainMenu;
 
     public int screenWidth;
     public int screenHeight;
@@ -37,18 +39,18 @@ namespace GeometryDash.Engine.Core
       floorHeight = (int)(screenHeight * GameSettings.floorFloat);
       floorY = screenHeight - floorHeight;
 
-      collisionEngine = new Physics.CollisionEngine();
+      collisionEngine = new CollisionEngine();
 
-      levelManager = new World.LevelManager();
+      levelManager = new LevelManager();
       levelManager.LoadLevel("Assets/Levels/level1.gdl");
 
-      Entities.ObjectPool pool = new Entities.ObjectPool();
-      levelStreamer = new World.LevelStreamer();
+      ObjectPool pool = new ObjectPool();
+      levelStreamer = new LevelStreamer();
       levelStreamer.Initialize(pool);
 
 
       cubeTexture = Raylib.LoadTexture(UserSettings.cubeTextureString);
-      cube = new Entities.PlayerCube(0f, floorY - Size, cubeTexture);
+      cube = new PlayerCube(0f, floorY - Size, cubeTexture);
       cube.IsGrounded = true;
       
       timeStep = new TimeStep((int)(GameSettings.targetFrameRate));
@@ -190,12 +192,12 @@ namespace GeometryDash.Engine.Core
         int screenX = (int)Math.Round(obj.PosX - smoothCameraX);
         int screenY = (int)obj.PosY;
 
-        if (obj.Type == GameObject.ObjectType.SolidBlock)
+        if (obj.Type == ObjectType.SolidBlock)
         {
           Raylib.DrawRectangle(screenX, screenY, Size, Size, Color.Gray);
           Raylib.DrawRectangleLines(screenX, screenY, Size, Size, Color.White);
         }
-        else if (obj.Type == GameObject.ObjectType.Spike)
+        else if (obj.Type == ObjectType.Spike)
         {
           Vector2 top = new Vector2(screenX + (Size / 2f), screenY);
           Vector2 bottomLeft = new Vector2(screenX, screenY + Size);
@@ -203,7 +205,7 @@ namespace GeometryDash.Engine.Core
 
           Raylib.DrawTriangle(top, bottomLeft, bottomRight, Color.Red);
         }
-        else if (obj.Type == GameObject.ObjectType.JumpPad)
+        else if (obj.Type == ObjectType.JumpPad)
         {
           //TODO
         }

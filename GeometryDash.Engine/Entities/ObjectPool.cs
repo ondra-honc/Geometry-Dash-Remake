@@ -2,23 +2,23 @@
 {
   public class ObjectPool
   {
-    readonly Queue<Entities.GameObject> queue = new Queue<Entities.GameObject>();
+    readonly Queue<GameObject> queue = new Queue<GameObject>();
 
     public void InitializeQueue(int capacity)
     {
       for (int i = 0; i < capacity; i++)
       {
-        Entities.GameObject obj = new Entities.GameObject();
+        GameObject obj = new GameObject();
         queue.Enqueue(obj);
       }
     }
 
-    public Entities.GameObject Get()
+    public GameObject Get()
     {
-      return queue.Count == 0 ? new Entities.GameObject() : queue.Dequeue();
+      return queue.Count == 0 ? new GameObject() : queue.Dequeue();
     }
 
-    public void Return(Entities.GameObject obj)
+    public void Return(GameObject obj)
     {
       obj.IsOnScreen = false;
       queue.Enqueue(obj);

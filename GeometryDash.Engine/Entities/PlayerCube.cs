@@ -1,5 +1,4 @@
-﻿using GeometryDash.Engine.Core;
-using Raylib_cs;
+﻿using Raylib_cs;
 
 namespace GeometryDash.Engine.Entities
 {
