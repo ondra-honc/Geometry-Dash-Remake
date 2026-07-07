@@ -7,6 +7,7 @@
 
     public const float targetFrameRate = 60f;
     public const float targetUpdate = 1f / targetFrameRate;
+    public const float cameraSpeed = 700f;
 
     public const float cubeHorizontalSpeed = 450f;
     public const float gravityForce = 5300f;

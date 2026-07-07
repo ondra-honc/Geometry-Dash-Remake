@@ -127,7 +127,7 @@ namespace GeometryDash.Engine.Core
         return;
       }
 
-      cameraX += 700f * deltaTime;
+      cameraX += GameSettings.cameraSpeed * deltaTime;
       cube.PosX = cameraX + 500f;
 
       levelStreamer.UpdateStreaming(levelManager.Blueprints, cameraX, (float)(Raylib.GetScreenWidth()));
@@ -235,7 +235,7 @@ namespace GeometryDash.Engine.Core
     {
       Raylib.ClearBackground(Color.SkyBlue);
 
-      float smoothCameraX = cameraX + (700f * timeStep.FixedDeltaTime * alpha);
+      float smoothCameraX = cameraX + (GameSettings.cameraSpeed * timeStep.FixedDeltaTime * alpha);
 
       Raylib.DrawText($"Attempt: {attemptCounter}", -(int)(smoothCameraX) + 650, floorY - 350, 60, Color.White);
 
