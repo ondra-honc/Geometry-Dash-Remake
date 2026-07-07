@@ -24,3 +24,6 @@ GeometryDash.Engine/
 └──World/
     ├── LevelStreamer.cs # Used for streaming the level data into Engine.cs for rendering
     └── LevelManager.cs  # Loading level data with pretedermined structure
+```
+## Disclaimer
+If you want to play geometry dash go purchase the original game
