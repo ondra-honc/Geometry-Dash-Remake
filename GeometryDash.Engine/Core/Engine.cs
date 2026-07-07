@@ -23,6 +23,8 @@ namespace GeometryDash.Engine.Core
     private float rotationAngle = 0f;
     private float currentRotationSpeed = 350f;
     private GameState currentState = GameState.MainMenu;
+    private Rectangle playButtonRec;
+    private bool isHoveringPlay = false;
 
     public int screenWidth;
     public int screenHeight;
@@ -39,15 +41,22 @@ namespace GeometryDash.Engine.Core
       floorHeight = (int)(screenHeight * GameSettings.floorFloat);
       floorY = screenHeight - floorHeight;
 
+      float btnWidth = 240f;
+      float btnHeight = 90f;
+      float btnX = (screenWidth - btnWidth) / 2f;
+      float btnY = (screenHeight - btnHeight) / 2f;
+
+      playButtonRec = new Rectangle(btnX, btnY, btnWidth, btnHeight);
+
       collisionEngine = new CollisionEngine();
 
       levelManager = new LevelManager();
       levelManager.LoadLevel("Assets/Levels/level1.gdl");
 
       ObjectPool pool = new ObjectPool();
+      
       levelStreamer = new LevelStreamer();
       levelStreamer.Initialize(pool);
-
 
       cubeTexture = Raylib.LoadTexture(UserSettings.cubeTextureString);
       cube = new PlayerCube(0f, floorY - Size, cubeTexture);
@@ -101,7 +110,7 @@ namespace GeometryDash.Engine.Core
       switch (currentState)
       {
         case GameState.MainMenu:
-          //UpdateMainMenu();
+          UpdateMainMenu();
           break;
 
         case GameState.Playing:
@@ -188,13 +197,31 @@ namespace GeometryDash.Engine.Core
       }
     }
 
+    private void UpdateMainMenu()
+    {
+      Vector2 mousePos = Raylib.GetMousePosition();
+
+      isHoveringPlay = Raylib.CheckCollisionPointRec(mousePos, playButtonRec);
+
+      if (isHoveringPlay && Raylib.IsMouseButtonDown(MouseButton.Left))
+      {
+        cameraX = 0f;
+        cube.PosX = cameraX + 300f;
+        cube.PosY = floorY - Size;
+        cube.VelocityY = 0f;
+        cube.IsGrounded = true;
+        rotationAngle = 0f;
+        currentState = GameState.Playing;
+      }
+    }
+
     private void Render(float alpha)
     {
       Raylib.BeginDrawing();
       switch (currentState)
       {
         case GameState.MainMenu:
-          //RenderMainMenu();
+          RenderMainMenu();
           break;
 
         case GameState.Playing:
@@ -208,7 +235,7 @@ namespace GeometryDash.Engine.Core
     {
       Raylib.ClearBackground(Color.SkyBlue);
 
-      float smoothCameraX = cameraX + (400f * timeStep.FixedDeltaTime * alpha);
+      float smoothCameraX = cameraX + (700f * timeStep.FixedDeltaTime * alpha);
 
       Raylib.DrawText($"Attempt: {attemptCounter}", -(int)(smoothCameraX) + 650, floorY - 350, 60, Color.White);
 
@@ -264,6 +291,28 @@ namespace GeometryDash.Engine.Core
         smoothRotationAngle,
         Color.White
       );
+    }
+
+    private void RenderMainMenu()
+    {
+      string titleText = "GEOMETRY DASH";
+      int titleFontSize = 70;
+      int titleWidth = Raylib.MeasureText(titleText, titleFontSize);
+      int titleX = (screenWidth - titleWidth) / 2;
+      int titleY = (int)(screenHeight * 0.25f); 
+
+      Raylib.DrawText(titleText, titleX, titleY, titleFontSize, Color.White);
+      Color buttonColor = isHoveringPlay ? Color.Lime : Color.Green;
+      Raylib.DrawRectangleRec(playButtonRec, buttonColor);
+      Raylib.DrawRectangleLinesEx(playButtonRec, 4, Color.White);
+
+      string btnText = "PLAY";
+      int btnFontSize = 40;
+      int btnTextWidth = Raylib.MeasureText(btnText, btnFontSize);
+      int btnTextX = (int)(playButtonRec.X + (playButtonRec.Width - btnTextWidth) / 2f);
+      int btnTextY = (int)(playButtonRec.Y + (playButtonRec.Height - btnFontSize) / 2f);
+
+      Raylib.DrawText(btnText, btnTextX, btnTextY, btnFontSize, Color.White);
     }
   }
 }
