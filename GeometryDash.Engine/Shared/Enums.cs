@@ -8,5 +8,12 @@
       Spike,
       JumpPad
     }
+
+    public enum GameState
+    {
+      MainMenu,
+      Playing,
+      GameOver
+    }
   }
 }
