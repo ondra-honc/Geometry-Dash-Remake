@@ -1,5 +1,4 @@
 ﻿using GeometryDash.Engine.Entities;
-using GeometryDash.Engine.Core;
 using static GeometryDash.Engine.Shared.Enums;
 
 namespace GeometryDash.Engine.Physics
