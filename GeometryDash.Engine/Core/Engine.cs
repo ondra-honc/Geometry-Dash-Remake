@@ -98,6 +98,20 @@ namespace GeometryDash.Engine.Core
 
     private void Update(float deltaTime)
     {
+      switch (currentState)
+      {
+        case GameState.MainMenu:
+          //UpdateMainMenu();
+          break;
+
+        case GameState.Playing:
+          UpdateGameplay(deltaTime);
+          break;
+      }
+    }
+    
+    private void UpdateGameplay(float deltaTime)
+    {
       if (cube.IsDead)
       {
         ResetLevel();
@@ -177,6 +191,21 @@ namespace GeometryDash.Engine.Core
     private void Render(float alpha)
     {
       Raylib.BeginDrawing();
+      switch (currentState)
+      {
+        case GameState.MainMenu:
+          //RenderMainMenu();
+          break;
+
+        case GameState.Playing:
+          RenderGameplay(alpha); 
+          break;
+      }
+      Raylib.EndDrawing();
+    }
+    
+    private void RenderGameplay(float alpha)
+    {
       Raylib.ClearBackground(Color.SkyBlue);
 
       float smoothCameraX = cameraX + (400f * timeStep.FixedDeltaTime * alpha);
@@ -235,8 +264,6 @@ namespace GeometryDash.Engine.Core
         smoothRotationAngle,
         Color.White
       );
-
-      Raylib.EndDrawing();
     }
   }
 }
